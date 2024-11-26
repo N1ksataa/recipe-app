@@ -37,28 +37,27 @@
 .nav-center li, .nav-right li {
     cursor: pointer; 
     font-size: 18px; 
-    position: relative; /* За да работят ефектите с псевдоелементи */
-    transition: color 0.3s ease, transform 0.3s ease; /* Гладка анимация */
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover ефекти */
+
 .nav-center li:hover, .nav-right li:hover {
-    transform: scale(1.1); /* Леко увеличаване */
+    transform: scale(1.1);
 }
 
-/* Подчертаване при hover */
+
 .nav-center li::after, .nav-right li::after {
-    content: ''; /* Псевдоелемент за линията */
+    content: '';
     position: absolute;
     left: 0;
-    bottom: -5px; /* Под елемента */
+    bottom: -5px;
     width: 0;
     height: 2px;
     transition: width 0.3s ease;
 }
 
 
-/* Ефект на засенчване */
 .nav-center li:hover, .nav-right li:hover {
-    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.75); /* Жълт ореол */
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.75);
 }
