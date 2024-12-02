@@ -8,6 +8,7 @@
     border-radius: 15px;
     text-align: center;
     width: 300px;
+    z-index: 10;
   }
   
   form {

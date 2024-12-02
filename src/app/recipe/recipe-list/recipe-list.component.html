@@ -1,0 +1,11 @@
+<div class="recipe-list">
+    @for (recipe of recipes; track $index) {
+      <div class="recipe-card">
+        <img [src]="recipe.image" alt="Choco" />
+        <h3>Chocolate Pudding</h3>
+        <p>Category: Dessert</p>
+        <button>Details</button>
+      </div>
+    }
+  </div>
+  
