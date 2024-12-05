@@ -4,7 +4,7 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: rgba(249, 249, 249, 0.85); /* Полупрозрачен фон */
+  background-color: rgba(249, 249, 249, 0.85);
   font-family: 'Poppins', sans-serif;
 }
 
@@ -23,7 +23,7 @@ label {
   font-weight: bold;
 }
 
-input, textarea, select {
+input, select {
   width: 95%;
   padding: 10px;
   font-size: 16px;
@@ -34,13 +34,27 @@ input, textarea, select {
   font-family: 'Poppins', sans-serif;
 }
 
-select {
-  width: 99%;
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  min-height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  overflow-y: auto;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
+.error-border {
+  border-left: solid red 6px !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
 button {
@@ -64,35 +78,24 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.ingredient-fields {
-  display: flex;
-  flex-direction: column;
-}
-
-.ingredient-fields input {
-  margin-bottom: 10px;
-}
-
-#add-ingredient {
-  width: auto;
-  padding: 12px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-#add-ingredient:hover {
-  background-color: #218838;
-}
-
 .ingredient-group {
+  margin-bottom: 20px;
+}
+
+.input-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.error-text {
+  color: red;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
 .ingredient-group input {
@@ -112,9 +115,20 @@ button:disabled {
   text-align: center;
   line-height: 28px;
   padding: 0;
-  margin-top: 5px
+  margin-top: 5px;
 }
 
 .remove-btn:hover {
   background-color: #ff1a1a;
+}
+
+#add-ingredient{
+  width: 150px;
+  color: white;
+  background-color: #4CAF50;
+  margin-top: 0;
+}
+
+#add-ingredient:hover{
+  background-color: #45a049;
 }

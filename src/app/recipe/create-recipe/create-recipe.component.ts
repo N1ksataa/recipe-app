@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,13 +15,17 @@ export class CreateRecipeComponent {
 
   constructor(private fb: FormBuilder) {
     this.recipeForm = this.fb.group({
-      title: [''],
-      image: [''],
-      category: [''],
-      description: [''],
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      image: ['', [
+        Validators.required, 
+        Validators.pattern('^https://.*')
+      ]],
+      category: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(10)]],
       ingredients: this.fb.array([this.createIngredient()]),
-      preparation: ['']
+      preparation: ['', [Validators.required, Validators.minLength(10)]]
     });
+    
   }
 
   get ingredients(): FormArray {
@@ -29,7 +33,9 @@ export class CreateRecipeComponent {
   }
 
   createIngredient(): FormGroup {
-    return this.fb.group({ name: [''] });
+    return this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+    });
   }
 
   addIngredient(): void {
@@ -44,5 +50,6 @@ export class CreateRecipeComponent {
 
   onSubmit(): void {
     console.log(this.recipeForm.value);
-  }
+};
+  
 }
