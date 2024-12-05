@@ -4,8 +4,8 @@ export interface User {
     email: string;
     username: string;
     password: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     recipes: Recipe[];
 }
 

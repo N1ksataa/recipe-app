@@ -9,7 +9,7 @@ export interface Recipe {
     image: string;
     authorId: User;
     likes: string[];
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
   

@@ -1,0 +1,42 @@
+<div class="profile-container">
+  <h2>Profile Details</h2>
+  <div class="user-info">
+    <p><strong>Username:</strong> JohnDoe</p>
+    <p><strong>Email:</strong> johndoe&#64;example.com</p>
+    <button (click)="toggleEditInfo()">Edit Info</button>
+    <button (click)="toggleChangePassword()">Change Password</button>
+  </div>
+
+  <div class="form-container" *ngIf="showEditInfo">
+    <h3>Edit Information</h3>
+    <form>
+      <label for="edit-username">New Username</label>
+      <input type="text" id="edit-username" placeholder="Enter new username" />
+
+      <label for="edit-email">New Email</label>
+      <input type="email" id="edit-email" placeholder="Enter new email" />
+
+      <div class="buttons">
+        <button type="button" id="save" class="save" (click)="toggleEditInfo()">Save</button>
+        <button type="button" id="cancel" class="cancel" (click)="toggleEditInfo()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="form-container" *ngIf="showChangePassword">
+    <h3>Change Password</h3>
+    <form>
+      <label for="old-password">Old Password</label>
+      <input type="password" id="old-password" placeholder="Enter old password" />
+
+      <label for="new-password">New Password</label>
+      <input type="password" id="new-password" placeholder="Enter new password" />
+
+      <div class="buttons">
+        <button type="button" id="save" class="save" (click)="toggleChangePassword()">Save</button>
+        <button type="button" id="cancel" class="cancel" (click)="toggleChangePassword()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
