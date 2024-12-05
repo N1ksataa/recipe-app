@@ -26,8 +26,8 @@ input {
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  margin-top: -5px;
   font-size: 15px;
+  margin-top: -5px;
 }
 
 input::placeholder {
@@ -65,4 +65,40 @@ button:hover {
 
 .signup-text a:hover {
   text-decoration: underline;
+}
+
+.error-border {
+  border-left: 6px solid red;
+}
+
+.error-text {
+  color: red;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+input {
+  width: 90%;
+}
+
+input[type="password"] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#password-label, #rePassword-label {
+  text-align: left;
+  font-size: 18px;
+  display: block;
+}
+
+
+form .error-text {
+  font-size: 16px;
+  padding-left: 5px;
 }
