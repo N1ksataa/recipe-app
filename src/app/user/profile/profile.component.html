@@ -9,34 +9,66 @@
 
   <div class="form-container" *ngIf="showEditInfo">
     <h3>Edit Information</h3>
-    <form>
+    <form [formGroup]="editInfoForm" (ngSubmit)="onSubmitEditInfo()">
       <label for="edit-username">New Username</label>
-      <input type="text" id="edit-username" placeholder="Enter new username" />
+      <input type="text" id="edit-username" formControlName="newUsername" placeholder="Enter new username"
+        [ngClass]="{'error-border': editInfoForm.get('newUsername')?.invalid && editInfoForm.get('newUsername')?.touched}" />
+
+      <div class="error-text"
+        *ngIf="editInfoForm.get('newUsername')?.hasError('required') && editInfoForm.get('newUsername')?.touched">
+        Username is required.
+      </div>
+      <div class="error-text"
+        *ngIf="editInfoForm.get('newUsername')?.hasError('minlength') && editInfoForm.get('newUsername')?.touched">
+        Username must be at least 6 characters.
+      </div>
 
       <label for="edit-email">New Email</label>
-      <input type="email" id="edit-email" placeholder="Enter new email" />
+      <input type="email" id="edit-email" formControlName="newEmail" placeholder="Enter new email"
+        [ngClass]="{'error-border': editInfoForm.get('newEmail')?.invalid && editInfoForm.get('newEmail')?.touched}" />
+
+      <div class="error-text"
+        *ngIf="editInfoForm.get('newEmail')?.hasError('required') && editInfoForm.get('newEmail')?.touched">
+        Email is required.
+      </div>
+
+      <div class="error-text"
+        *ngIf="editInfoForm.get('newEmail')?.hasError('emailValidator') && editInfoForm.get('newEmail')?.dirty">
+        Invalid email address.
+      </div>
+
 
       <div class="buttons">
-        <button type="button" id="save" class="save" (click)="toggleEditInfo()">Save</button>
-        <button type="button" id="cancel" class="cancel" (click)="toggleEditInfo()">Cancel</button>
+        <button type="submit" class="save" id="save" [disabled]="editInfoForm.invalid">Save</button>
+        <button type="button" class="cancel" id="cancel" (click)="toggleEditInfo()">Cancel</button>
       </div>
     </form>
   </div>
 
   <div class="form-container" *ngIf="showChangePassword">
     <h3>Change Password</h3>
-    <form>
+    <form [formGroup]="passwordsForm" (ngSubmit)="onSubmitChangePassword()">
       <label for="old-password">Old Password</label>
-      <input type="password" id="old-password" placeholder="Enter old password" />
+      <input type="password" id="old-password" formControlName="oldPassword" placeholder="Enter old password" />
 
       <label for="new-password">New Password</label>
-      <input type="password" id="new-password" placeholder="Enter new password" />
+      <input type="password" id="new-password" formControlName="newPassword" placeholder="Enter new password"
+      [ngClass]="{'error-border': passwordsForm.get('newPassword')?.invalid && passwordsForm.get('newPassword')?.touched}" />
+      <div class="error-text"
+        *ngIf="passwordsForm.get('newPassword')?.hasError('required') && passwordsForm.get('newPassword')?.touched">
+        Password is required.
+      </div>
+      <div class="error-text"
+        *ngIf="passwordsForm.get('newPassword')?.hasError('minlength') && passwordsForm.get('newPassword')?.touched">
+        Password must be at least 6 characters.
+      </div>
+
+
 
       <div class="buttons">
-        <button type="button" id="save" class="save" (click)="toggleChangePassword()">Save</button>
-        <button type="button" id="cancel" class="cancel" (click)="toggleChangePassword()">Cancel</button>
+        <button type="submit" class="save" id="save" [disabled]="passwordsForm.invalid">Save</button>
+        <button type="button" class="cancel" id="cancel" (click)="toggleChangePassword()">Cancel</button>
       </div>
     </form>
   </div>
 </div>
-
