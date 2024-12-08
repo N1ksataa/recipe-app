@@ -6,9 +6,10 @@ import { BackgroundComponent } from './core/background/background.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent, BackgroundComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'recipe-app';
