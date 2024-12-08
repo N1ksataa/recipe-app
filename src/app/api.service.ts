@@ -34,8 +34,4 @@ export class ApiService {
     likeRecipe(id: string, userId: string) {
         return this.http.post<Recipe>(`${this.apiUrl}/${id}/like`, { userId });
     }
-
-    unlikeRecipe(id: string, userId: string) {
-        return this.http.post<Recipe>(`${this.apiUrl}/${id}/unlike`, { userId });
-    }
 }
