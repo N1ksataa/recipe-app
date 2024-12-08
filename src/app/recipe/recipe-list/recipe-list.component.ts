@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
-  userId = 'canko556';
+  userId = 'canko56';
 
   constructor(private apiService: ApiService) {}
 

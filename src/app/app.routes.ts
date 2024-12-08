@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './error/error.component';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { CurrentRecipeComponent } from './recipe/current-recipe/current-recipe.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,7 +16,9 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'profile', component: ProfileComponent},
 
-  {path: 'recipes', component: RecipeListComponent},
+  { path: 'recipes', component: RecipeListComponent },
+  { path: 'recipes/:id', component: CurrentRecipeComponent },
+  
   {path: 'create-recipe', component: CreateRecipeComponent},
 
 
