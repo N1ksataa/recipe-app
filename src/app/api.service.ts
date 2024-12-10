@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Recipe } from "./types/recipe";
 
 @Injectable({
@@ -21,10 +22,9 @@ export class ApiService {
         return this.http.post<Recipe>(`/api/recipes`, payload);
     }
     
-
-    likeRecipe(id: string, userId: string) {
-        return this.http.put<Recipe>(`/api/recipes/${id}/like`, { userId });
-    }
+    likeRecipe(recipeId: string, likes: string[]): Observable<Recipe> {
+        return this.http.put<Recipe>(`/api/recipes/${recipeId}/like`, { likes });
+      }
 
     updateRecipe(id: string, recipeData: Partial<Recipe>) {
         return this.http.put<Recipe>(`/api/recipes/${id}`, recipeData);

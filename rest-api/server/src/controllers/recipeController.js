@@ -69,11 +69,20 @@ recipeController.delete('/:id', authMiddleware, async (req, res) => {
 // Лайкване на рецепта
 recipeController.put('/:id/like', authMiddleware, async (req, res) => {
     const { id } = req.params;
-    const userId = req.user._id; // Вземане на ID на логнатия потребител
+    const { likes } = req.body; // Получаване на новия масив с лайкове
 
     try {
-        const updatedRecipe = await recipeService.likeRecipe(id, userId);
-        res.json(updatedRecipe);
+        const recipe = await Recipe.findById(id);
+
+        if (!recipe) {
+            return res.status(404).json({ message: 'Recipe not found' });
+        }
+
+        // Обновява лайковете на рецептата
+        recipe.likes = likes;
+        await recipe.save();
+
+        res.json(recipe);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }

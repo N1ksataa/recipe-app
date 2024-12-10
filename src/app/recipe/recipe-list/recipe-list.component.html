@@ -6,22 +6,22 @@
     <div class="buttons">
       <button [routerLink]="['/recipes', recipe._id]">Details</button>
       
-      <div class="like-dislike" *ngIf="userId && userId !== recipe.authorId.username">
-      <button
-        *ngIf="!isLiked(recipe)"
-        class="like-button"
-        (click)="toggleLike(recipe)"
-      >
-        Like
-      </button>
+      <div class="like-dislike" *ngIf="userId && userId !== recipe.authorId._id">
+        <button
+          *ngIf="recipe.likes && !isLiked(recipe)"
+          class="like-button"
+          (click)="toggleLike(recipe)"
+        >
+          Like
+        </button>
 
-      <button
-        *ngIf="isLiked(recipe)"
-        class="dislike-button"
-        (click)="toggleLike(recipe)"
-      >
-        Dislike
-      </button>
+        <button
+          *ngIf="recipe.likes && isLiked(recipe)"
+          class="dislike-button"
+          (click)="toggleLike(recipe)"
+        >
+          Dislike
+        </button>
       </div>
     </div>
     <div class="author">Author: {{ recipe.authorId.username }}</div>

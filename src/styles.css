@@ -52,3 +52,10 @@ app-search {
   overflow-y: auto;
 }
 
+app-my-recipes{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1000;
+  z-index: 1;
+  overflow-y: auto;
+}

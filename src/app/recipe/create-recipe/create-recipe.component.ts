@@ -68,7 +68,7 @@ export class CreateRecipeComponent {
     
   const formattedCategory = this.getFormattedCategory(category);
 
-   this.apiService.createRecipe(title, image, formattedCategory, description, ingredients, preparation).subscribe((data) => {
+    this.apiService.createRecipe(title, image, formattedCategory, description, ingredients, preparation).subscribe((data) => {
     this.router.navigate(['/recipes']);
    });
 };

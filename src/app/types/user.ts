@@ -7,14 +7,13 @@ export interface User {
     password: string;
     createdAt: string;
     updatedAt: string;
-    recipes: Recipe[];
 }
 
 export interface UserForAuth {
     email: string;
     username: string;
     password: string;
-    id: string;
+    _id: string;
   }
   
 

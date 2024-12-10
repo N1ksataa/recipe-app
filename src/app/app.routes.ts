@@ -8,6 +8,8 @@ import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.comp
 import { ProfileComponent } from './user/profile/profile.component';
 import { CurrentRecipeComponent } from './recipe/current-recipe/current-recipe.component';
 import { SearchComponent } from './recipe/search/search.component';
+import { AuthGuard } from './guards/auth.guard';
+import { MyRecipesComponent } from './recipe/my-recipes/my-recipes.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,13 +17,13 @@ export const routes: Routes = [
 
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
   { path: 'recipes', component: RecipeListComponent },
   { path: 'recipes/:id', component: CurrentRecipeComponent },
   { path: 'search', component: SearchComponent},
-  
-  {path: 'create-recipe', component: CreateRecipeComponent},
+  { path: 'my-recipes', component: MyRecipesComponent, canActivate: [AuthGuard]},
+  {path: 'create-recipe', component: CreateRecipeComponent, canActivate: [AuthGuard]},
 
 
   { path: '404', component: PageNotFoundComponent},
