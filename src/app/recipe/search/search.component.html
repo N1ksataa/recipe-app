@@ -1,0 +1,46 @@
+<div class="app-search">
+<div class="search-container">
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search by name..."
+      [(ngModel)]="searchQuery"
+      (input)="filterRecipes()"
+    />
+    <select [(ngModel)]="selectedCategory" (change)="filterRecipes()">
+      <option value="">All Categories</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+    <button (click)="clearFilters()">Clear</button>
+  </div>
+
+  <div class="recipe-list">
+    <div class="recipe-card" *ngFor="let recipe of filteredRecipes">
+      <img [src]="recipe.image" alt="{{ recipe.title }}" />
+      <h3>{{ recipe.title }}</h3>
+      <p>Category: {{ recipe.category }}</p>
+      <div class="buttons">
+        <button [routerLink]="['/recipes', recipe._id]">Details</button>
+
+        <div class="like-dislike" *ngIf="userId && userId !== recipe.authorId.username">
+          <button
+            *ngIf="!isLiked(recipe)"
+            class="like-button"
+            (click)="toggleLike(recipe)"
+          >
+            Like
+          </button>
+
+          <button
+            *ngIf="isLiked(recipe)"
+            class="dislike-button"
+            (click)="toggleLike(recipe)"
+          >
+            Dislike
+          </button>
+        </div>
+      </div>
+      <div class="author">Author: {{ recipe.authorId.username }}</div>
+    </div>
+  </div>
+</div>

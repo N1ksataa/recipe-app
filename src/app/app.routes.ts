@@ -7,6 +7,7 @@ import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { CurrentRecipeComponent } from './recipe/current-recipe/current-recipe.component';
+import { SearchComponent } from './recipe/search/search.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes: Routes = [
 
   { path: 'recipes', component: RecipeListComponent },
   { path: 'recipes/:id', component: CurrentRecipeComponent },
+  { path: 'search', component: SearchComponent},
   
   {path: 'create-recipe', component: CreateRecipeComponent},
 

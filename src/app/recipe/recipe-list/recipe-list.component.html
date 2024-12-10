@@ -7,7 +7,6 @@
       <button [routerLink]="['/recipes', recipe._id]">Details</button>
       
       <div class="like-dislike" *ngIf="userId && userId !== recipe.authorId.username">
-      <!-- Like button -->
       <button
         *ngIf="!isLiked(recipe)"
         class="like-button"
@@ -16,7 +15,6 @@
         Like
       </button>
 
-      <!-- Dislike button -->
       <button
         *ngIf="isLiked(recipe)"
         class="dislike-button"

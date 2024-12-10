@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -13,7 +15,15 @@ import { CommonModule } from '@angular/common';
 export class CreateRecipeComponent {
   recipeForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  categories = [
+    { value: 'appetizer', label: 'Appetizer' },
+    { value: 'dessert', label: 'Dessert' },
+    { value: 'main-course', label: 'Main Course' },
+    { value: 'snacks', label: 'Snacks' }
+  ];
+
+
+  constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService) {
     this.recipeForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       image: ['', [
@@ -41,15 +51,26 @@ export class CreateRecipeComponent {
   addIngredient(): void {
     this.ingredients.push(this.createIngredient());
   }
-
+  
   removeIngredient(index: number): void {
     if (this.ingredients.length > 1) {
       this.ingredients.removeAt(index);
     }
   }
 
+  getFormattedCategory(value: string): string {
+    return this.categories.find(category => category.value === value)?.label || '';
+  }
+
   onSubmit(): void {
-    console.log(this.recipeForm.value);
+    const { title, image, category, description, preparation } = this.recipeForm.value;
+    const ingredients = this.recipeForm.get('ingredients')?.value.map((ingredient: { name: string; }) => ingredient.name);
+    
+  const formattedCategory = this.getFormattedCategory(category);
+
+   this.apiService.createRecipe(title, image, formattedCategory, description, ingredients, preparation).subscribe((data) => {
+    this.router.navigate(['/recipes']);
+   });
 };
   
 }

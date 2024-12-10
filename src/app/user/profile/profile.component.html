@@ -1,8 +1,8 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="profileDetails">
   <h2>Profile Details</h2>
   <div class="user-info">
-    <p><strong>Username:</strong> JohnDoe</p>
-    <p><strong>Email:</strong> johndoe&#64;example.com</p>
+    <p><strong>Username:</strong> {{ profileDetails.username }}</p>
+    <p><strong>Email:</strong> {{ profileDetails.email }}</p>
     <button (click)="toggleEditInfo()">Edit Info</button>
     <button (click)="toggleChangePassword()">Change Password</button>
   </div>

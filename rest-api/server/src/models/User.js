@@ -16,6 +16,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    recipes: {
+        type: Array,
+        default: []
+    }
 }, { timestamps: true });
 
 

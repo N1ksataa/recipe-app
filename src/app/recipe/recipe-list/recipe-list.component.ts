@@ -27,16 +27,12 @@ export class RecipeListComponent implements OnInit {
   }
 
   toggleLike(recipe: Recipe): void {
-    // Тук ще добавим или премахнем userId от likes масива
     if (this.isLiked(recipe)) {
-      // Премахваме лайка
       recipe.likes = recipe.likes.filter(id => id !== this.userId);
     } else {
-      // Добавяме лайк
       recipe.likes.push(this.userId);
     }
 
-    // Може да добавите API заявка за актуализиране на рецептата на сървъра тук
     this.apiService.updateRecipe(recipe._id, { likes: recipe.likes }).subscribe();
   }
 }

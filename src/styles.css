@@ -12,7 +12,8 @@ app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .image-container {
@@ -39,7 +40,15 @@ router-outlet {
 app-recipe-list {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 1000;
+  z-index: 1;
+}
+
+app-search {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1000;
   z-index: 1;
   overflow-y: auto;
 }
+

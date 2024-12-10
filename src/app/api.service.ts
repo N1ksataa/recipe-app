@@ -1,37 +1,36 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Recipe } from "./types/recipe";
-import { environment } from "../environments/environment";
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApiService {
-    private apiUrl = `${environment.apiUrl}/recipes`;
-
     constructor(private http: HttpClient) {}
 
     getRecipes() {
-        return this.http.get<Recipe[]>(this.apiUrl);
+        return this.http.get<Recipe[]>(`/api/recipes`);
     }
 
     getRecipeById(id: string) {
-        return this.http.get<Recipe>(`${this.apiUrl}/${id}`);
+        return this.http.get<Recipe>(`/api/recipes/${id}`);
     }
 
-    createRecipe(recipeData: Partial<Recipe>) {
-        return this.http.post<Recipe>(this.apiUrl, recipeData);
+    createRecipe(title: string, image: string, category: string, description: string, ingredients: string[], preparation: string) {
+        const payload = { title, image, category, description, ingredients, preparation };
+        return this.http.post<Recipe>(`/api/recipes`, payload);
+    }
+    
+
+    likeRecipe(id: string, userId: string) {
+        return this.http.put<Recipe>(`/api/recipes/${id}/like`, { userId });
     }
 
     updateRecipe(id: string, recipeData: Partial<Recipe>) {
-        return this.http.put<Recipe>(`${this.apiUrl}/${id}`, recipeData);
+        return this.http.put<Recipe>(`/api/recipes/${id}`, recipeData);
     }
 
     deleteRecipe(id: string) {
-        return this.http.delete(`${this.apiUrl}/${id}`);
-    }
-
-    likeRecipe(id: string, userId: string) {
-        return this.http.post<Recipe>(`${this.apiUrl}/${id}/like`, { userId });
+        return this.http.delete(`/api/recipes/${id}`);
     }
 }
