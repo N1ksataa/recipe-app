@@ -1,31 +1,64 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
-import { PageNotFoundComponent } from './error/error.component';
-import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
-import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
-import { ProfileComponent } from './user/profile/profile.component';
-import { CurrentRecipeComponent } from './recipe/current-recipe/current-recipe.component';
-import { SearchComponent } from './recipe/search/search.component';
 import { AuthGuard } from './guards/auth.guard';
-import { MyRecipesComponent } from './recipe/my-recipes/my-recipes.component';
+import { NoAuthGuard } from './guards/noAuth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { 
+    path: 'home', 
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) 
+  },
 
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { 
+    path: 'login', 
+    loadComponent: () => import('./user/login/login.component').then(m => m.LoginComponent),
+    canActivate: [NoAuthGuard]
+  },
+  { 
+    path: 'register', 
+    loadComponent: () => import('./user/register/register.component').then(m => m.RegisterComponent),
+    canActivate: [NoAuthGuard]
+  },
+  { 
+    path: 'profile', 
+    loadComponent: () => import('./user/profile/profile.component').then(m => m.ProfileComponent), 
+    canActivate: [AuthGuard] 
+  },
 
-  { path: 'recipes', component: RecipeListComponent },
-  { path: 'recipes/:id', component: CurrentRecipeComponent },
-  { path: 'search', component: SearchComponent},
-  { path: 'my-recipes', component: MyRecipesComponent, canActivate: [AuthGuard]},
-  {path: 'create-recipe', component: CreateRecipeComponent, canActivate: [AuthGuard]},
+  { 
+    path: 'recipes', 
+    loadComponent: () => import('./recipe/recipe-list/recipe-list.component').then(m => m.RecipeListComponent) 
+  },
+  { 
+    path: 'recipes/:id', 
+    loadComponent: () => import('./recipe/current-recipe/current-recipe.component').then(m => m.CurrentRecipeComponent) 
+  },
+  { 
+    path: 'recipes/:id/edit', 
+    loadComponent: () => import('./recipe/edit-recipe/edit-recipe.component').then(m => m.EditRecipeComponent), 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'search', 
+    loadComponent: () => import('./recipe/search/search.component').then(m => m.SearchComponent) 
+  },
+  { 
+    path: 'my-recipes', 
+    loadComponent: () => import('./recipe/my-recipes/my-recipes.component').then(m => m.MyRecipesComponent), 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'create-recipe', 
+    loadComponent: () => import('./recipe/create-recipe/create-recipe.component').then(m => m.CreateRecipeComponent), 
+    canActivate: [AuthGuard] 
+  },
 
-
-  { path: '404', component: PageNotFoundComponent},
-  { path: '**', redirectTo: '/404'}
+  { 
+    path: '404', 
+    loadComponent: () => import('./error/error.component').then(m => m.PageNotFoundComponent) 
+  },
+  { 
+    path: '**', 
+    redirectTo: '/404' 
+  }
 ];

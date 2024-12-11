@@ -5,7 +5,6 @@ import { emailValidator } from '../../utils/email.validator';
 import { DOMAINS } from '../../constants';
 import { UserService } from '../user.service';
 import { ProfileDetails } from '../../types/user';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',

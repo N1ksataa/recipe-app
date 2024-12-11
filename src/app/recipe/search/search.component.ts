@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   filteredRecipes: Recipe[] = [];
   searchQuery: string = '';
   selectedCategory: string = '';
-  categories: string[] = ['Appetizer', 'Main Course', 'Dessert'];
+  categories: string[] = ['Appetizer', 'Main Course', 'Dessert', 'Snacks'];
 
   userId: string | null = null;
 
@@ -28,7 +28,6 @@ export class SearchComponent implements OnInit {
     this.userService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.userId = user._id;
-        console.log(this.userId);
       }
     });
     
@@ -46,34 +45,9 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  isLiked(recipe: Recipe): boolean {
-    if (!this.userId){
-      console.error('User is not logged in.')
-      return false;
-    }
-
-    // Проверява дали текущият потребител е харесал рецептата
-    return recipe.likes.includes(this.userId);
-  }
-
-  toggleLike(recipe: Recipe): void {
-    // Проверяваме дали userId не е null
-    if (!this.userId) {
-      console.error('User is not logged in.');
-      return;
-    }
-  
-    if (this.isLiked(recipe)) {
-    recipe.likes = recipe.likes.filter((id) => id !== this.userId);  // Премахване на лайка
-  } else {
-    recipe.likes.push(this.userId);  // Добавяне на лайк
-  }
-}
-
   clearFilters(): void {
     this.searchQuery = '';
     this.selectedCategory = '';
     this.filterRecipes();
   }
 }
-

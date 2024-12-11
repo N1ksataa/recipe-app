@@ -7,7 +7,7 @@ import { Recipe } from "./types/recipe";
     providedIn: 'root',
 })
 export class ApiService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getRecipes() {
         return this.http.get<Recipe[]>(`/api/recipes`);
@@ -21,16 +21,17 @@ export class ApiService {
         const payload = { title, image, category, description, ingredients, preparation };
         return this.http.post<Recipe>(`/api/recipes`, payload);
     }
-    
-    likeRecipe(recipeId: string, likes: string[]): Observable<Recipe> {
-        return this.http.put<Recipe>(`/api/recipes/${recipeId}/like`, { likes });
-      }
+
+    likeRecipe(recipeId: string, userId: string): Observable<Recipe> {
+        return this.http.put<Recipe>(`/api/recipes/${recipeId}/like`, { userId });
+    }
+
 
     updateRecipe(id: string, recipeData: Partial<Recipe>) {
         return this.http.put<Recipe>(`/api/recipes/${id}`, recipeData);
     }
 
-    deleteRecipe(id: string) {
-        return this.http.delete(`/api/recipes/${id}`);
+    deleteRecipe(id: string): Observable<void> {
+        return this.http.delete<void>(`/api/recipes/${id}`);
     }
 }

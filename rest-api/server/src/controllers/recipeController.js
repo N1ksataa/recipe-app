@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import recipeService from '../services/recipeService.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
+import Recipe from '../models/Recipe.js';
 
 const recipeController = Router();
 
@@ -69,7 +70,11 @@ recipeController.delete('/:id', authMiddleware, async (req, res) => {
 // Лайкване на рецепта
 recipeController.put('/:id/like', authMiddleware, async (req, res) => {
     const { id } = req.params;
-    const { likes } = req.body; // Получаване на новия масив с лайкове
+    const { userId } = req.body;
+
+    if (!userId) {
+        return res.status(400).json({ message: 'User ID is required' });
+    }
 
     try {
         const recipe = await Recipe.findById(id);
@@ -78,14 +83,24 @@ recipeController.put('/:id/like', authMiddleware, async (req, res) => {
             return res.status(404).json({ message: 'Recipe not found' });
         }
 
-        // Обновява лайковете на рецептата
-        recipe.likes = likes;
+        // Проверяваме дали потребителят е вече лайкнал
+        const hasLiked = recipe.likes.includes(userId);
+
+        // Добавяме или премахваме лайка
+        if (hasLiked) {
+            recipe.likes.pull(userId);  // Ако потребителят вече е лайкнал, премахваме лайка
+        } else {
+            recipe.likes.push(userId);  // Ако не е лайкнал, добавяме лайк
+        }
+
         await recipe.save();
 
-        res.json(recipe);
+        res.json(recipe);  // Връщаме актуализираната рецепта
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(500).json({ message: 'Error updating recipe: ' + err.message });
     }
 });
+
+
 
 export default recipeController;

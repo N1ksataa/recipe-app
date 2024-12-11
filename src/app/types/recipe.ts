@@ -10,6 +10,7 @@ export interface Recipe {
     image: string;
     authorId: User;
     likes: string[];
+    likedByUser?: boolean;
     createdAt: string;
     updatedAt: string;
 }

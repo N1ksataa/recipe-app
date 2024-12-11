@@ -23,7 +23,6 @@ export class MyRecipesComponent implements OnInit {
     this.userService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.userId = user._id;
-        console.log(user);
         this.loadMyRecipes();
       }
     });

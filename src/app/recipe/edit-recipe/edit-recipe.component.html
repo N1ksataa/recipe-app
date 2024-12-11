@@ -1,0 +1,79 @@
+<div class="create-recipe-container" [formGroup]="recipeForm">
+    <h2>Edit Recipe</h2>
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="Enter title"
+          [ngClass]="{'error-border': recipeForm.get('title')?.invalid && recipeForm.get('title')?.touched}" />
+        <div class="error-text" *ngIf="recipeForm.get('title')?.touched">
+          <span *ngIf="recipeForm.get('title')?.errors?.['required']">Title is required.</span>
+          <span *ngIf="recipeForm.get('title')?.errors?.['minlength']">Title must be at least 5 characters long.</span>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="image">Image (URL)</label>
+        <input id="image" type="text" formControlName="image" placeholder="Enter image URL"
+          [ngClass]="{'error-border': recipeForm.get('image')?.invalid && recipeForm.get('image')?.touched}" />
+        <div class="error-text" *ngIf="recipeForm.get('image')?.touched">
+          <span *ngIf="recipeForm.get('image')?.errors?.['required']">Image URL is required.</span>
+          <span *ngIf="recipeForm.get('image')?.errors?.['pattern']">Image URL must start with "https://".</span>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" formControlName="category">
+            <option value="" disabled>Select a category</option>
+            <option *ngFor="let category of categories" [value]="category.value">
+              {{ category.label }}
+            </option>
+          </select>
+          
+        <div class="error-text" *ngIf="recipeForm.get('category')?.touched">
+          <span *ngIf="recipeForm.get('category')?.errors?.['required']">Category is required.</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input id="description" type="text" formControlName="description" placeholder="Enter description"
+          [ngClass]="{'error-border': recipeForm.get('description')?.invalid && recipeForm.get('description')?.touched}" />
+        <div class="error-text" *ngIf="recipeForm.get('description')?.touched">
+          <span *ngIf="recipeForm.get('description')?.errors?.['required']">Description is required.</span>
+          <span *ngIf="recipeForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters
+            long.</span>
+        </div>
+      </div>
+  
+      <div class="form-group" formArrayName="ingredients">
+        <label>Ingredients</label>
+        <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i" class="ingredient-group">
+          <div class="input-wrapper">
+            <input formControlName="name" type="text" placeholder="Enter ingredient"
+              [ngClass]="{'error-border': ingredient.get('name')?.invalid && ingredient.get('name')?.touched}" />
+            <button type="button" (click)="removeIngredient(i)" class="remove-btn">X</button>
+          </div>
+          <div class="error-text" *ngIf="ingredient.get('name')?.touched">
+            <span *ngIf="ingredient.get('name')?.errors?.['required']">Ingredient is required.</span>
+            <span *ngIf="ingredient.get('name')?.errors?.['minlength']">Ingredient must be at least 5 characters long.</span>
+          </div>
+        </div>
+        <button type="button" id="add-ingredient" (click)="addIngredient()">Add Ingredient</button>
+      </div>
+  
+      <div class="form-group">
+        <label for="preparation">Preparation</label>
+        <input id="preparation" type="text" formControlName="preparation" placeholder="Enter preparation instructions"
+          [ngClass]="{'error-border': recipeForm.get('preparation')?.invalid && recipeForm.get('preparation')?.touched}" />
+        <div class="error-text" *ngIf="recipeForm.get('preparation')?.touched">
+          <span *ngIf="recipeForm.get('preparation')?.errors?.['required']">Preparation is required.</span>
+          <span *ngIf="recipeForm.get('preparation')?.errors?.['minlength']">Preparation must be at least 10 characters
+            long.</span>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="recipeForm.invalid">Update Recipe</button>
+    </form>
+  </div>
+  

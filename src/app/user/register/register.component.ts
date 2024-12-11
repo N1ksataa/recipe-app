@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { UserService } from '../user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
@@ -31,19 +31,25 @@ export class RegisterComponent {
     });
   }
 
+  ngOnInit(): void {
+    if (this.userService.isLogged) {
+      this.router.navigate(['/home']);
+    }
+  }
+
   onSubmit(): void {
     const { email, username, passGroup: { password, rePassword } } = this.registerForm.value;
-  
+
     if (password !== rePassword) {
       console.error('Passwords do not match!');
       return;
     }
-  
+
     this.userService.register({ email, username, password })
       .subscribe((response) => {
         console.log('User registered:', response);
         this.router.navigate(['/home']);
       });
   }
-  
+
 }  

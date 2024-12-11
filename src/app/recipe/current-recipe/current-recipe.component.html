@@ -1,4 +1,4 @@
-<div class="recipe-detail">
+<div class="recipe-detail" *ngIf="recipe">
     <h2>{{ recipe.title }}</h2>
 
     <p class="author">Author: {{ recipe.authorId.username }}</p>
@@ -25,20 +25,26 @@
         <p>{{ recipe.preparation }}</p>
     </div>
 
-    <div class="like-dislike" *ngIf="userId && userId !== recipe.authorId.username">
-        <button *ngIf="!isLiked(recipe)" class="like-button" (click)="toggleLike(recipe)">
+    <div class="like-dislike" *ngIf="userId">
+        <button *ngIf="userId !== recipe.authorId._id && !isLiked(recipe)" class="like-button"
+            (click)="toggleLike(recipe)">
             Like
         </button>
 
-        <button *ngIf="isLiked(recipe)" class="dislike-button" (click)="toggleLike(recipe)">
+        <button *ngIf="userId !== recipe.authorId._id && isLiked(recipe)" class="dislike-button"
+            (click)="toggleLike(recipe)">
             Dislike
         </button>
 
         <p class="likes-count">Likes: {{ recipe.likes.length }}</p>
     </div>
 
-    <div class="edit-actions" *ngIf="userId === recipe.authorId.username">
-        <button class="edit-button">Edit</button>
-        <button class="delete-button">Delete</button>
+    <div class="likes-only" *ngIf="!userId">
+        <p class="likes-count">Likes: {{ recipe.likes.length }}</p>
+    </div>
+
+    <div class="edit-actions" *ngIf="userId === recipe.authorId._id">
+        <button class="edit-button" (click)="onEdit()">Edit</button>
+        <button class="delete-button" (click)="deleteRecipe()">Delete</button>
     </div>
 </div>
