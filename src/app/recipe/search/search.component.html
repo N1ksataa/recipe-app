@@ -17,7 +17,7 @@
         <button (click)="clearFilters()">Clear</button>
       </div>
 
-      <div class="recipe-list">
+      <div *ngIf="filteredRecipes.length > 0; else noRecipes" class="recipe-list">
         <div class="recipe-card" *ngFor="let recipe of filteredRecipes">
           <img [src]="recipe.image" alt="{{ recipe.title }}" />
           <h3>{{ recipe.title }}</h3>
@@ -28,6 +28,12 @@
           <div class="author">Author: {{ recipe.authorId.username }}</div>
         </div>
       </div>
+
+      <ng-template #noRecipes>
+        <div class="no-recipes-wrapper">
+          <p class="no-recipes-message">No recipes found. Try adjusting your search criteria.</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

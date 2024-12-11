@@ -1,59 +1,78 @@
-# RecipeApp
+# Recipe Sharing Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+## Overview
+This is a web-based application for sharing recipes among users. The application features a robust frontend built with Angular and a backend REST API implemented using Express.js and Node.js, connected to a MongoDB database for data persistence.
 
-## Development server
+## Technologies Used
+- **Frontend:** Angular
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Styling:** CSS
+- **Package Manager:** npm
 
-To start a local development server, run:
+## Features
+### Guest Users
+- Can access the Home Page, Catalog, and Search functionalities.
+- Can register and log in to the application.
 
-```bash
-ng serve
-```
+### Registered Users
+- Create, edit, and delete their own recipes.
+- View and like recipes created by other users.
+- Edit their profile information, including the option to change their password.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Recipe Management
+- Add a new recipe with details such as title, category, and image.
+- Edit or delete recipes owned by the user.
+- Like recipes shared by other users.
 
-## Code scaffolding
+### Account and Form Validation
+- All forms (registration, login, and recipe creation) are validated to ensure data integrity.
+- **Username and email uniqueness:** The application enforces uniqueness for both the username and email during registration. Users cannot register with an existing username or email.
+- **Changing username or email:**  If a logged-in user attempts to change their username or email to one that already exists in the database, the change will not be allowed, and the user will receive an appropriate error message.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Application Pages
+- **Login/Register:** Accessible to guest users only.
+- **Home Page:** Accessible by everyone (both guest and logged-in users).
+- **Catalog:** Displays all recipes. //Accessible by everyone (both guest and logged-in users)//
+- **Search:** Allows users to search for recipes. //Accessible by everyone (both guest and logged-in users).//
+- **Create Recipe:** Allows registered users to add a new recipe. // Accessible by registered (logged-in) users only. //
+- **My Recipes:** Displays recipes created by the logged-in user. // Accessible by the logged-in user only. //
+- **Profile:** Displays and allows editing of user details. // Accessible by the logged-in user only //
+- **Current Recipe:** Displays the details of a specific recipe. 
+  - **Guest Users:** Can view recipe details.
+  - **Logged-in Users (Not Recipe Owner):** Can view and like the recipe.
+  - **Recipe Owners:** Can view, edit, or delete the recipe.
+- **Edit Recipe:** Allows recipe owners to modify their recipes. // Accessible by the recipe owner only. //
 
-```bash
-ng generate component component-name
-```
+## Guards
+- **authGuard:** Restricts access to certain pages (e.g., Create Recipe, My Recipes, Profile) for guest users.
+- **noAuthGuard:** Prevents logged-in users from accessing Login and Register pages.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Project Structure
+- The project is organized into folders by components for maintainability. For example:
+  - `core` folder contains reusable components like `header`, `footer`, and `background`.
+  - Each feature has its own folder with related components, services, and styles.
 
-```bash
-ng generate --help
-```
+## How to Run the Application
+### Prerequisites
+- Node.js and npm installed.
+- MongoDB server running locally or in the cloud.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Steps
+1. Clone the repository from GitHub and extract it.
+2. Open the project in Visual Studio Code.
+3. In the terminal, navigate to the project root and install dependencies:
+   ```bash
+   npm i
+   ```
+4. Start the Angular frontend:
+   ```bash
+   cd src/app
+   ng serve
+   ```
+5. Open a new terminal and start the backend server:
+   ```bash
+   cd rest-api/server
+   npm start
+   ```
+6. Ensure that the MongoDB instance is running. The application will use it to store user and recipe data.

@@ -1,11 +1,25 @@
-<div class="recipe-list">
-  <div class="recipe-card" *ngFor="let recipe of recipes; let i = index">
-    <img [src]="recipe.image" alt="{{ recipe.title }}" />
-    <h3>{{ recipe.title }}</h3>
-    <p>Category: {{ recipe.category }}</p>
-    <div class="buttons">
-      <button [routerLink]="['/recipes', recipe._id]">Details</button>
-    </div>
-    <div class="author">Author: {{ recipe.authorId.username }}</div>
+<div class="recipe-list-container">
+  <div *ngIf="isLoading" class="loading-wrapper">
+    <app-loader></app-loader>
   </div>
+
+  <ng-container *ngIf="!isLoading">
+    <div *ngIf="recipes.length > 0; else noRecipes" class="recipe-list">
+      <div class="recipe-card" *ngFor="let recipe of recipes; let i = index">
+        <img [src]="recipe.image" alt="{{ recipe.title }}" />
+        <h3>{{ recipe.title }}</h3>
+        <p>Category: {{ recipe.category }}</p>
+        <div class="buttons">
+          <button [routerLink]="['/recipes', recipe._id]">Details</button>
+        </div>
+        <div class="author">Author: {{ recipe.authorId.username }}</div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noRecipes>
+    <div class="no-recipes-wrapper">
+      <p class="no-recipes-message">No recipes found. Start sharing your favorite dishes!</p>
+    </div>
+  </ng-template>
 </div>
