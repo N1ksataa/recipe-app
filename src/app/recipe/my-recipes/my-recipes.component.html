@@ -7,12 +7,12 @@
     <div *ngIf="filteredRecipes.length > 0; else noRecipes" class="recipe-list">
       <div class="recipe-card" *ngFor="let recipe of filteredRecipes; let i = index">
         <img [src]="recipe.image" alt="{{ recipe.title }}" />
-        <h3>{{ recipe.title }}</h3>
+        <h3>{{ recipe.title | slice : 20 }}</h3>
         <p>Category: {{ recipe.category }}</p>
         <div class="buttons">
           <button [routerLink]="['/recipes', recipe._id]">Details</button>
         </div>
-        <div class="author">Author: {{ recipe.authorId.username }}</div>
+        <div class="author">Author: {{ recipe.authorId.username | slice : 30 }}</div>
       </div>
     </div>
   </ng-container>

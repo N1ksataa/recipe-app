@@ -9,9 +9,11 @@ export interface Recipe {
     preparation: string;
     image: string;
     authorId: User;
-    likes: string[];
+    likes: {
+        username: string,
+        _id: string
+    }[];
     likedByUser?: boolean;
     createdAt: string;
     updatedAt: string;
 }
-  

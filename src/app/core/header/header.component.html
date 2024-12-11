@@ -14,7 +14,7 @@
       <li *ngIf="!isLoggedIn" routerLink="/login">Log in</li>
       <li *ngIf="!isLoggedIn" routerLink="/register">Register</li>
 
-      <li *ngIf="isLoggedIn" routerLink="/profile">{{ username }}'s Profile</li>
+      <li *ngIf="isLoggedIn" routerLink="/profile">{{ username | slice : 12}}'s Profile</li>
       <li *ngIf="isLoggedIn" (click)="logout()">Logout</li>
     </ul>
   </div>
@@ -34,7 +34,7 @@
       <li *ngIf="isLoggedIn" routerLink="/my-recipes" (click)="closeMenu()">My Recipes</li>
       <li *ngIf="!isLoggedIn" routerLink="/login" (click)="closeMenu()">Log in</li>
       <li *ngIf="!isLoggedIn" routerLink="/register" (click)="closeMenu()">Register</li>
-      <li *ngIf="isLoggedIn" routerLink="/profile" (click)="closeMenu()">{{ username }}'s Profile</li>
+      <li *ngIf="isLoggedIn" routerLink="/profile" (click)="closeMenu()">{{ username | slice: 12 }}'s Profile</li>
       <li *ngIf="isLoggedIn" (click)="logout(); closeMenu()">Logout</li>
     </ul>
   </div>

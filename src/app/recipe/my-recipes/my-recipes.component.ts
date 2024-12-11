@@ -5,11 +5,12 @@ import { ApiService } from '../../api.service';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { SlicePipe } from '../../shared/pipes/slice.pipe';
 
 @Component({
   selector: 'app-my-recipes',
   standalone: true,
-  imports: [CommonModule, RouterLink, LoaderComponent],
+  imports: [CommonModule, RouterLink, LoaderComponent, SlicePipe],
   templateUrl: './my-recipes.component.html',
   styleUrl: './my-recipes.component.css',
 })
@@ -31,7 +32,7 @@ export class MyRecipesComponent implements OnInit {
   }
 
   loadMyRecipes(): void {
-    this.isLoading = true; // Започваме с индикатор за зареждане
+    this.isLoading = true;
     this.apiService.getRecipes().subscribe({
       next: (recipes) => {
         this.filteredRecipes = recipes.filter(recipe => recipe.authorId._id === this.userId);

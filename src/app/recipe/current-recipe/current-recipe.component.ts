@@ -67,14 +67,23 @@ export class CurrentRecipeComponent implements OnInit {
   }
 
   isLiked(recipe: Recipe): boolean {
-    return recipe.likedByUser ?? recipe.likes.includes(this.userId!);
+    const likes = recipe.likes.map((e) => {
+      if(typeof e === 'object'){
+        return e._id
+      }
+      return e
+    })
+    return likes.includes(this.userId?.toString()!);
   }
 
   private checkUserLikeStatus(): void {
     if (!this.userId || !this.recipe) return;
 
-    const hasLiked = this.recipe.likes.includes(this.userId);
+    const likes = this.recipe.likes.map((e) => {
+      return e._id
+    })
+
+    const hasLiked = likes.includes(this.userId?.toString());
     this.recipe.likedByUser = hasLiked;
   }
-  
 }

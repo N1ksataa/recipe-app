@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../user/user.service';
+import { SlicePipe } from '../../shared/pipes/slice.pipe';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SlicePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -19,7 +20,7 @@ export class HeaderComponent {
   }
 
   closeMenu() {
-    this.menuOpen = false; // Затваря менюто
+    this.menuOpen = false;
   }
 
   get isLoggedIn(): boolean {

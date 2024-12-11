@@ -77,7 +77,7 @@ recipeController.put('/:id/like', authMiddleware, async (req, res) => {
     }
 
     try {
-        const recipe = await Recipe.findById(id);
+        const recipe = await Recipe.findById(id).populate("authorId");
 
         if (!recipe) {
             return res.status(404).json({ message: 'Recipe not found' });

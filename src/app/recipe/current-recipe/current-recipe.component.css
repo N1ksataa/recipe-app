@@ -25,6 +25,22 @@
     margin: 20px 0;
   }
 
+  .recipe-description p {
+    overflow-wrap: break-word;
+  }
+
+  .preparation p{
+    overflow-wrap: break-word;
+  }
+
+  .ingredients li{
+    overflow-wrap: break-word;
+  }
+
+  .recipe-detail h2{
+    overflow-wrap: break-word;
+  }
+
   .author {
     color: rgb(94, 94, 94);
     font-size: 15px;

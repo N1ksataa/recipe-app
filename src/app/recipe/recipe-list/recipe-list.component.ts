@@ -5,11 +5,12 @@ import { ApiService } from '../../api.service';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { SlicePipe } from '../../shared/pipes/slice.pipe';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, LoaderComponent],
+  imports: [CommonModule, RouterLink, LoaderComponent, SlicePipe],
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css'
 })
