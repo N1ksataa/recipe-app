@@ -42,9 +42,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const { username, password } = this.loginForm.value;
-
-    this.userService.login(username, password).subscribe(()=>{
-      this.router.navigate(['/home']);
-    })
-  };
+  
+    this.userService.login(username, password).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        alert('Invalid username or password');
+      }
+    });
+  }
 }

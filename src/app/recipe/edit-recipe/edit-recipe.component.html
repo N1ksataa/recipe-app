@@ -1,4 +1,9 @@
-<div class="create-recipe-container" [formGroup]="recipeForm">
+<div *ngIf="isLoading" class="loader">
+  <app-loader></app-loader> 
+</div>
+
+
+<div class="create-recipe-container" [formGroup]="recipeForm" *ngIf="!isLoading">
     <h2>Edit Recipe</h2>
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
       <div class="form-group">

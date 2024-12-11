@@ -18,4 +18,24 @@
       <li *ngIf="isLoggedIn" (click)="logout()">Logout</li>
     </ul>
   </div>
+
+  <div class="hamburger" (click)="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="menu" [class.open]="menuOpen">
+    <ul>
+      <li routerLink="/" (click)="closeMenu()">Home</li>
+      <li routerLink="/recipes" (click)="closeMenu()">Catalog</li>
+      <li routerLink="/search" (click)="closeMenu()">Search</li>
+      <li *ngIf="isLoggedIn" routerLink="/create-recipe" (click)="closeMenu()">Create Recipe</li>
+      <li *ngIf="isLoggedIn" routerLink="/my-recipes" (click)="closeMenu()">My Recipes</li>
+      <li *ngIf="!isLoggedIn" routerLink="/login" (click)="closeMenu()">Log in</li>
+      <li *ngIf="!isLoggedIn" routerLink="/register" (click)="closeMenu()">Register</li>
+      <li *ngIf="isLoggedIn" routerLink="/profile" (click)="closeMenu()">{{ username }}'s Profile</li>
+      <li *ngIf="isLoggedIn" (click)="logout(); closeMenu()">Logout</li>
+    </ul>
+  </div>
 </nav>

@@ -3,16 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-edit-recipe',
   templateUrl: './edit-recipe.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, LoaderComponent],
   styleUrl: './edit-recipe.component.css'
 })
 export class EditRecipeComponent implements OnInit {
   recipeForm: FormGroup;
+  isLoading: boolean = true; 
   categories = [
     { value: 'appetizer', label: 'Appetizer' },
     { value: 'dessert', label: 'Dessert' },
@@ -42,6 +44,7 @@ export class EditRecipeComponent implements OnInit {
     if (this.recipeId) {
       this.apiService.getRecipeById(this.recipeId).subscribe(recipe => {
         this.populateForm(recipe);
+        this.isLoading = false;
       });
     }
   }
@@ -97,6 +100,7 @@ export class EditRecipeComponent implements OnInit {
 
     if (this.recipeId) {
       this.apiService.updateRecipe(this.recipeId, recipeData).subscribe(() => {
+        alert('Recipe edited successfully.');
         this.router.navigate(['/recipes']);
       });
     }

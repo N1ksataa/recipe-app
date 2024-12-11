@@ -54,10 +54,23 @@ export class RegisterComponent implements OnInit {
     }
 
     this.userService.register({ email, username, password })
-      .subscribe((response) => {
-        console.log('User registered:', response);
-        this.router.navigate(['/home']);
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          if (error.status === 400) {
+            if (error.error.message === 'Username already exists') {
+              alert('This username is already taken!');
+            } else if (error.error.message === 'Email already exists') {
+              alert('This email is already in use!');
+            } else {
+              alert('An error occurred during registration. Please try again.');
+            }
+          } else {
+            alert('An unknown error occurred. Please try again.');
+          }
+        }
       });
   }
-
-}  
+}

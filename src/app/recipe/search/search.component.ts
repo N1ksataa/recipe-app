@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
 
   filterRecipes(): void {
     this.filteredRecipes = this.recipes.filter((recipe) => {
-      const matchesName = recipe.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+      const matchesName = recipe.title.toLowerCase().startsWith(this.searchQuery.toLowerCase());
       const matchesCategory = this.selectedCategory ? recipe.category === this.selectedCategory : true;
       return matchesName && matchesCategory;
     });

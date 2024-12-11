@@ -90,12 +90,17 @@ export class ProfileComponent implements OnInit {
   
       this.userSevice.changeUserDetails(newUsername, newEmail).subscribe({
         next: (updatedUser) => {
-          console.log('Details changed successfully:', updatedUser);
           this.profileDetails = { username: updatedUser.username, email: updatedUser.email };
+          alert('Details changed successfully!');
           this.toggleEditInfo();
         },
         error: (err) => {
           console.error('Error changing details:', err);
+          alert(`Error changing details: Username or email is already taken! Try again!`);
+          this.editInfoForm.setValue({
+            newUsername: this.profileDetails.username,
+            newEmail: this.profileDetails.email,
+          });
         },
       });
     }
@@ -104,14 +109,22 @@ export class ProfileComponent implements OnInit {
   onSubmitChangePassword() {
     if (this.passwordsForm.valid) {
       const { oldPassword, newPassword } = this.passwordsForm.value;
+
+      if (oldPassword === newPassword) {
+        alert('Error changing details: Old password cannot be the same as the new password.');
+        this.passwordsForm.reset();
+        return;
+      }
   
       this.userSevice.changePassword(oldPassword, newPassword).subscribe({
         next: () => {
-          console.log('Password changed successfully');
+          alert('Password changed successfully');
           this.toggleChangePassword();
         },
         error: (err) => {
-          console.error('Error changing password:', err);
+          console.error('Error changing details:', err);
+          alert(`Error changing details: Old password is incorrect`);
+          this.passwordsForm.reset();
         },
       });
     }

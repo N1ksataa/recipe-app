@@ -71,6 +71,7 @@ export class CreateRecipeComponent implements OnInit {
     const formattedCategory = this.getFormattedCategory(category);
 
     this.apiService.createRecipe(title, image, formattedCategory, description, ingredients, preparation).subscribe(() => {
+      alert('Recipe created successfully.');
       this.router.navigate(['/recipes']);
     });
   }
