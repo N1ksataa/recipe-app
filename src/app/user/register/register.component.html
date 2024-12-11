@@ -1,4 +1,9 @@
-<div class="register-container">
+<div *ngIf="isLoading" class="loader">
+  <app-loader></app-loader> 
+</div>
+
+
+<div class="register-container" *ngIf="!isLoading">
     <h2>Register</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <label for="email">Email:</label>

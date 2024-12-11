@@ -5,17 +5,19 @@ import { emailValidator } from '../../utils/email.validator';
 import { DOMAINS } from '../../constants';
 import { UserService } from '../user.service';
 import { ProfileDetails } from '../../types/user';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LoaderComponent],
 })
 export class ProfileComponent implements OnInit {
   showEditInfo = false;
   showChangePassword = false;
+  isLoading = true;
 
   profileDetails: ProfileDetails = {
     username: '',
@@ -51,6 +53,12 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => console.error('Error fetching user:', err),
     });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
   }
   
 

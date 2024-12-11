@@ -3,17 +3,19 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user.service';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, CommonModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule, LoaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })  
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  isLoading = true;
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +32,12 @@ export class LoginComponent implements OnInit {
     if (this.userService.isLogged) {
       this.router.navigate(['/home']);
     }
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
   }
 
   onSubmit(): void {

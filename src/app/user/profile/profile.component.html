@@ -1,4 +1,8 @@
-<div class="profile-container" *ngIf="profileDetails">
+<div *ngIf="isLoading" class="loader-wrapper">
+  <app-loader></app-loader> 
+</div>
+
+<div class="profile-container" *ngIf="!isLoading && profileDetails">
   <h2>Profile Details</h2>
   <div class="user-info">
     <p><strong>Username:</strong> {{ profileDetails.username }}</p>
@@ -37,7 +41,6 @@
         Invalid email address.
       </div>
 
-
       <div class="buttons">
         <button type="submit" class="save" id="save" [disabled]="editInfoForm.invalid">Save</button>
         <button type="button" class="cancel" id="cancel" (click)="toggleEditInfo()">Cancel</button>
@@ -62,8 +65,6 @@
         *ngIf="passwordsForm.get('newPassword')?.hasError('minlength') && passwordsForm.get('newPassword')?.touched">
         Password must be at least 6 characters.
       </div>
-
-
 
       <div class="buttons">
         <button type="submit" class="save" id="save" [disabled]="passwordsForm.invalid">Save</button>

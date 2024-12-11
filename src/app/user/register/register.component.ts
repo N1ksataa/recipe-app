@@ -6,16 +6,18 @@ import { emailValidator } from '../../utils/email.validator';
 import { matchPasswordsValidator } from '../../utils/match-passwords.validator';
 import { DOMAINS } from '../../constants';
 import { UserService } from '../user.service';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, CommonModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule, LoaderComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  isLoading = true;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.registerForm = this.fb.group({
@@ -35,6 +37,12 @@ export class RegisterComponent implements OnInit {
     if (this.userService.isLogged) {
       this.router.navigate(['/home']);
     }
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
   }
 
   onSubmit(): void {

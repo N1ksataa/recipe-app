@@ -1,5 +1,10 @@
-    <div class="image-overlay">
-      <h2>Discover delicious recipes</h2>
-      <p>Find your favorite dishes and explore new tastes!</p>
-      <a routerLink="/recipes" class="cta-btn"><span>Browse the catalog</span></a>
-    </div>
+<main>
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!isLoading" class="image-overlay">
+    <h2>Discover delicious recipes</h2>
+    <p>Find your favorite dishes and explore new tastes!</p>
+    <a routerLink="/recipes" class="cta-btn"><span>Browse the catalog</span></a>
+  </div>
+</main>
